@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Changelog — TabGuard</title>
+<meta name="description" content="Every TabGuard release, what changed and why. Full transparency on permission and behavior changes." />
+<style>
+  :root{
+    --bg:#0a0e14; --surface:#131820; --surface-2:#1a2130;
+    --text:#e6edf3; --muted:#8b98a8; --accent:#4f9cf9; --accent-2:#7ee787;
+    --danger:#f85149; --warn:#d29922; --border:#30363d;
+    --radius:12px; --max:820px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+       background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  header{padding:56px 0 32px;border-bottom:1px solid var(--border)}
+  h1{font-size:clamp(28px,4vw,40px);letter-spacing:-0.02em;margin-bottom:12px}
+  .sub{color:var(--muted);font-size:16px;max-width:600px}
+  .back{display:inline-block;margin-top:16px;font-size:14px}
+  main{padding:40px 0 64px}
+  .release{padding:28px 0;border-bottom:1px solid var(--border)}
+  .release:last-child{border-bottom:none}
+  .rel-head{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:16px}
+  .ver{font-size:20px;font-weight:700;letter-spacing:-0.01em}
+  .date{color:var(--muted);font-size:14px}
+  .tag{font-size:11px;padding:2px 9px;border-radius:999px;border:1px solid var(--border);
+       color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
+  .tag.live{color:var(--accent-2);border-color:var(--accent-2)}
+  .tag.review{color:var(--warn);border-color:var(--warn)}
+  .tag.dev{color:var(--accent);border-color:var(--accent)}
+  h3{font-size:15px;margin:20px 0 8px;color:var(--text)}
+  h3:first-of-type{margin-top:0}
+  ul{list-style:none;padding-left:0}
+  li{padding:5px 0 5px 22px;position:relative;color:var(--muted);font-size:14.5px}
+  li:before{content:"›";position:absolute;left:6px;color:var(--accent);font-weight:700}
+  li strong{color:var(--text);font-weight:600}
+  .note{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);
+        border-radius:8px;padding:14px 16px;margin:14px 0;font-size:14px;color:var(--muted)}
+  .note strong{color:var(--text)}
+  footer{padding:40px 0 64px;text-align:center;color:var(--muted);font-size:13px;
+         border-top:1px solid var(--border);margin-top:40px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Changelog</h1>
+    <p class="sub">Every release, what changed and why. If a permission is removed or behavior changes, it is listed here.</p>
+    <a href="index.html" class="back">← Back to TabGuard</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div class="release">
+      <div class="rel-head">
+        <span class="ver">v0.2.3</span>
+        <span class="date">prepared 21 Oct 2026</span>
+        <span class="tag dev">In development</span>
+      </div>
+      <p class="sub" style="margin-bottom:16px">Not submitted yet. Will ship once v0.2.2 review completes.</p>
+
+      <h3>Changed</h3>
+      <ul>
+        <li><strong>Checksum verification on restore.</strong> Before opening any tab, TabGuard now recomputes the SHA-256 checksum of the stored session and compares it with the checksum saved at save time. If they differ, restore is blocked with a clear message instead of opening a corrupted session.</li>
+        <li><strong>Clearer error on restore.</strong> When verification fails, the popup says "Data corrupted: checksum mismatch" instead of a generic "Restore failed".</li>
+      </ul>
+
+      <h3>Fixed</h3>
+      <ul>
+        <li><strong>Unused permission removed.</strong> The <code>storage</code> permission was declared in v0.2.2 but never used — all session data lives in IndexedDB. It has been removed from the manifest.</li>
+        <li><strong>Auto-backup growth.</strong> Auto-backups are now capped at 20. Older auto-backups are deleted as new ones are created, so IndexedDB no longer grows without bound for long-running installs.</li>
+      </ul>
+
+      <div class="note">
+        <strong>Why this matters:</strong> v0.2.2 listed "verified saves" as a feature, but the verification step only compared tab counts. v0.2.3 makes the claim literal — the checksum is actually re-verified on every restore.
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="rel-head">
+        <span class="ver">v0.2.2</span>
+        <span class="date">21 Oct 2026</span>
+        <span class="tag review">In review</span>
+      </div>
+
+      <h3>Changed</h3>
+      <ul>
+        <li><strong>Free for everyone.</strong> The Pro tier, trial logic and payment integration from earlier builds were removed. All features are unlocked, with no account and no license key.</li>
+        <li><strong>Zero network requests.</strong> The extension makes no calls to any server. All data stays in your browser.</li>
+        <li><strong>Reduced permissions.</strong> <code>host_permissions</code> is empty. Only <code>tabs</code>, <code>storage</code>, <code>unlimitedStorage</code> and <code>alarms</code> are requested.</li>
+      </ul>
+
+      <h3>Added</h3>
+      <ul>
+        <li>Restore preview with tab count, window count and estimated RAM.</li>
+        <li>One-click JSON export per session.</li>
+        <li>Auto-backup every 30 minutes while Chrome is open.</li>
+      </ul>
+
+      <h3>Fixed</h3>
+      <ul>
+        <li>Eleven Chrome Web Store submission errors resolved before the first submission.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="rel-head">
+        <span class="ver">v0.2.1</span>
+        <span class="date">21 Oct 2026 (internal)</span>
+        <span class="tag">Superseded</span>
+      </div>
+      <ul>
+        <li>Fixed five blockers flagged during pre-submission review.</li>
+        <li>Never published.</li>
+      </ul>
+    </div>
+
+    <div class="release">
+      <div class="rel-head">
+        <span class="ver">v0.2.0</span>
+        <span class="date">20 Oct 2026 (internal)</span>
+        <span class="tag">Superseded</span>
+      </div>
+      <ul>
+        <li>First build with payment integration. Never shipped — payment provider does not support the developer's country.</li>
+        <li>Led to the decision to go free-first in v0.2.2.</li>
+      </ul>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><a href="index.html">Home</a> · <a href="privacy.html">Privacy</a> · <a href="mailto:tuyentn23@gmail.com">Contact</a></p>
+    <p style="margin-top:12px;font-size:12px">© 2026 TabGuard</p>
+  </div>
+</footer>
+
+</body>
+</html>

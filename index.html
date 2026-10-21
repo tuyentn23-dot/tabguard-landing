@@ -228,10 +228,15 @@
 <section id="faq">
   <div class="wrap">
     <h2><span class="num">04</span>Questions</h2>
-    <details><summary>When will TabGuard launch?</summary><p>Targeting beta in 8–12 weeks. Survey participants get first access + 50% off.</p></details>
+    <details><summary>When will TabGuard launch?</summary><p>Submitted to the Chrome Web Store on 21 October 2026. Review usually takes 2–7 days. Survey participants and waitlist members are notified first.</p></details>
     <details><summary>What happens to my data if I stop using it?</summary><p>You own your data. Export to JSON at any time. No lock-in, no deletion traps.</p></details>
     <details><summary>Why should I trust you with my tabs?</summary><p>We don't sync your tabs to any server. All tab data stays local on your device. All core features work offline, locally.</p></details>
     <details><summary>Will it stay free?</summary><p>Yes for all current features. If a Pro tier is added later, existing users keep everything they have today, free.</p></details>
+    <details><summary>What does "verified saves" actually mean?</summary><p>When you save, TabGuard computes a SHA-256 checksum of every tab URL in the session and stores it. When you restore, it recomputes the checksum and compares. If the stored data has been altered or corrupted, restore is blocked with a clear warning instead of opening the wrong tabs. The checksum is stored locally, in IndexedDB, and never leaves your device.</p></details>
+    <details><summary>Does TabGuard sync my tabs across devices?</summary><p>No. Every session is stored only in your browser's local IndexedDB. There is no server, no account, and no network request. To move data, export to JSON and import on another device.</p></details>
+    <details><summary>Which browsers are supported?</summary><p>TabGuard targets Chromium-based browsers. The current listing is published for Chrome only. Brave, Edge and Vivaldi should work when installed manually, but they are not officially tested yet.</p></details>
+    <details><summary>Is it really free? Will it stay free?</summary><p>Yes. All features are free today, no account required. If a Pro tier is added later, every feature you have today will remain free for you. There is no license key and no device lock.</p></details>
+    <details><summary>What happens to my saved sessions if I uninstall?</summary><p>Chrome deletes extension storage when you uninstall. Export your sessions to JSON first (one click per session) so you keep a portable copy. This is why export is available on every session.</p></details>
     
   </div>
 </section>
@@ -258,7 +263,7 @@
     <p>
       <strong style="color:var(--text)">TabGuard</strong> — built by a solo developer who lost too many tabs.
       <br/>
-      <a href="privacy.html">Privacy</a> · <a href="#faq">FAQ</a> ·
+      <a href="privacy.html">Privacy</a> · <a href="changelog.html">Changelog</a> · <a href="#faq">FAQ</a> ·
       <a href="mailto:tuyentn23@gmail.com">Contact</a>
     </p>
     <p style="margin-top:16px;font-size:12px">© 2026 TabGuard. All rights reserved.</p>

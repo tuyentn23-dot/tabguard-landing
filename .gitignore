@@ -1,0 +1,15 @@
+# Internal / not for public GitHub Pages
+.commitmsg*.txt
+_backups/
+marketing/
+DEPLOY_CHECKLIST.md
+SHOW_HN_DRAFT.md
+SURVEY_SPEC.md
+*.bak
+*.bak2
+*.bak3
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
