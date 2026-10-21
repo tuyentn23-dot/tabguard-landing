@@ -26,10 +26,10 @@ th{color:var(--text);font-weight:600}
 <body>
 <div class="wrap">
 <h1>TabGuard Privacy Policy</h1>
-<p class="meta">Last updated: 2026-10-21 · Applies to TabGuard Chrome Extension v0.2.1 and later</p>
+<p class="meta">Last updated: 2026-10-21 · Applies to TabGuard Chrome Extension v0.2.2 and later</p>
 
 <div class="card">
-<strong>Summary.</strong> TabGuard stores your tab sessions locally on your device. The only third-party service it contacts is ExtensionPay, used only if you choose to purchase the Pro plan. No analytics, no advertising, no tracking.
+<strong>Summary.</strong> TabGuard stores your tab sessions locally on your device. It does not contact any server, collect any analytics, or transmit any data outside your browser. No accounts, no payments, no third-party services.
 </div>
 
 <h2>1. What TabGuard stores locally</h2>
@@ -42,15 +42,8 @@ th{color:var(--text);font-weight:600}
 </ul>
 <p>This local data never leaves your device.</p>
 
-<h2>2. Third-party service: ExtensionPay</h2>
-<p>TabGuard uses <a href="https://extensionpay.com" rel="noopener">ExtensionPay</a> only if you choose to purchase the Pro plan:</p>
-<ul>
-<li>ExtensionPay processes your payment via Stripe. TabGuard never sees or stores your card details.</li>
-<li>ExtensionPay stores the email address you provide at checkout, used solely to issue and restore your license.</li>
-<li>TabGuard fetches your license status from extensionpay.com to unlock Pro features.</li>
-<li>ExtensionPay privacy policy: <a href="https://extensionpay.com/privacy" rel="noopener">https://extensionpay.com/privacy</a></li>
-</ul>
-<p>If you never purchase Pro, no payment or personal data is transmitted to ExtensionPay.</p>
+<h2>2. No third-party services</h2>
+<p>TabGuard does not contact ExtensionPay or any other third-party service. The extension makes zero network requests. All data stays in your browser's local storage on your device.</p>
 
 <h2>3. What TabGuard does NOT do</h2>
 <ul>
@@ -69,14 +62,12 @@ th{color:var(--text);font-weight:600}
 <tr><td><code>storage</code></td><td>Save preferences and session data</td></tr>
 <tr><td><code>unlimitedStorage</code></td><td>IndexedDB quota for many saved sessions</td></tr>
 <tr><td><code>alarms</code></td><td>Schedule the 30-minute auto-backup</td></tr>
-<tr><td><code>host_permissions: https://extensionpay.com/*</code></td><td>Only to verify your Pro license with ExtensionPay</td></tr>
 </table>
 
 <h2>5. Data deletion</h2>
 <ul>
 <li>Delete any individual session from the popup (Delete button).</li>
 <li>Remove all local data by uninstalling TabGuard, or via Chrome → Settings → Privacy → Clear browsing data → IndexedDB for chrome-extension.</li>
-<li>To delete your ExtensionPay license record, email the address below and it will be removed.</li>
 </ul>
 
 <h2>6. Children's privacy</h2>
