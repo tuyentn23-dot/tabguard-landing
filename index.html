@@ -21,7 +21,6 @@
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
 
-  /* Hero */
   header{padding:96px 0 64px;text-align:center;border-bottom:1px solid var(--border)}
   .badge{display:inline-block;padding:4px 12px;border-radius:999px;
          background:var(--surface-2);color:var(--accent-2);font-size:13px;
@@ -39,13 +38,11 @@
   .btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}
   .btn-ghost:hover{background:var(--surface-2);text-decoration:none}
 
-  /* Sections */
   section{padding:64px 0;border-bottom:1px solid var(--border)}
   h2{font-size:clamp(24px,3vw,32px);margin-bottom:16px;letter-spacing:-0.01em}
   h2 .num{color:var(--accent);font-variant-numeric:tabular-nums;margin-right:8px}
   .lead{color:var(--muted);font-size:17px;margin-bottom:32px;max-width:720px}
 
-  /* Problem cards */
   .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
   .card{background:var(--surface);border:1px solid var(--border);
         border-radius:var(--radius);padding:24px}
@@ -55,7 +52,6 @@
   .quote{border-left:3px solid var(--danger);padding-left:12px;margin-top:12px;
          color:var(--muted);font-style:italic;font-size:13.5px}
 
-  /* Features */
   .feat-list{list-style:none}
   .feat-list li{padding:14px 0;border-bottom:1px solid var(--border);
                 display:flex;gap:14px;align-items:flex-start}
@@ -64,7 +60,6 @@
   .feat-title{font-weight:600;margin-bottom:2px}
   .feat-desc{color:var(--muted);font-size:14.5px}
 
-  /* Pricing */
   .pricing{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
   .price{background:var(--surface);border:1px solid var(--border);
          border-radius:var(--radius);padding:28px;position:relative}
@@ -80,14 +75,12 @@
   .price ul li{padding:6px 0;font-size:14px;color:var(--muted)}
   .price ul li:before{content:"✓  ";color:var(--accent-2);font-weight:700}
 
-  /* Survey */
   .survey-box{background:linear-gradient(135deg,var(--surface) 0%,var(--surface-2) 100%);
               border:1px solid var(--border);border-radius:var(--radius);
               padding:32px;text-align:center}
   .survey-box h3{margin-bottom:12px;font-size:20px}
   .survey-box p{color:var(--muted);margin-bottom:24px;font-size:15px}
 
-  /* FAQ */
   details{background:var(--surface);border:1px solid var(--border);
           border-radius:var(--radius);padding:16px 20px;margin-bottom:12px}
   summary{cursor:pointer;font-weight:600;list-style:none}
@@ -97,7 +90,6 @@
   details[open] summary::before{transform:rotate(90deg)}
   details p{color:var(--muted);margin-top:12px;font-size:14.5px}
 
-  /* Footer */
   footer{padding:48px 0 64px;text-align:center;color:var(--muted);font-size:14px}
   footer a{color:var(--muted)}
 
@@ -118,13 +110,12 @@
       No silent failures. No license lock-in. Export any time.
     </p>
     <div class="cta-row">
-      <a href="#survey" class="btn btn-primary">Join the waitlist →</a>
+      <a href="survey.html" class="btn btn-primary">Take the 5-min survey →</a>
       <a href="#problem" class="btn btn-ghost">Why TabGuard?</a>
     </div>
   </div>
 </header>
 
-<!-- PROBLEM -->
 <section id="problem">
   <div class="wrap">
     <h2><span class="num">01</span>The tab problem is real</h2>
@@ -155,7 +146,6 @@
   </div>
 </section>
 
-<!-- SOLUTION -->
 <section id="solution">
   <div class="wrap">
     <h2><span class="num">02</span>How TabGuard is different</h2>
@@ -164,53 +154,16 @@
       always know its state.</strong>
     </p>
     <ul class="feat-list">
-      <li>
-        <span class="check">✓</span>
-        <div>
-          <div class="feat-title">Verified saves</div>
-          <div class="feat-desc">Every save is checksum-verified and shows a badge. You'll never wonder if it worked.</div>
-        </div>
-      </li>
-      <li>
-        <span class="check">✓</span>
-        <div>
-          <div class="feat-title">Restore preview</div>
-          <div class="feat-desc">See exactly how many tabs, windows, and estimated RAM before you click restore.</div>
-        </div>
-      </li>
-      <li>
-        <span class="check">✓</span>
-        <div>
-          <div class="feat-title">Export to JSON / HTML</div>
-          <div class="feat-desc">One-click export at any time. No login required. Your data is portable by design.</div>
-        </div>
-      </li>
-      <li>
-        <span class="check">✓</span>
-        <div>
-          <div class="feat-title">Auto-backup with visible log</div>
-          <div class="feat-desc">Hourly local snapshots (7-day retention) with a human-readable history you can inspect.</div>
-        </div>
-      </li>
-      <li>
-        <span class="check">✓</span>
-        <div>
-          <div class="feat-title">License that travels</div>
-          <div class="feat-desc">Email-based license, not Google-account-locked. Works on Chrome, Brave, Edge, Vivaldi.</div>
-        </div>
-      </li>
-      <li>
-        <span class="check">✓</span>
-        <div>
-          <div class="feat-title">Crash recovery built-in</div>
-          <div class="feat-desc">Session snapshot every 5 minutes. If Chrome crashes, your tabs are already safe.</div>
-        </div>
-      </li>
+      <li><span class="check">✓</span><div><div class="feat-title">Verified saves</div><div class="feat-desc">Every save is checksum-verified and shows a badge. You'll never wonder if it worked.</div></div></li>
+      <li><span class="check">✓</span><div><div class="feat-title">Restore preview</div><div class="feat-desc">See exactly how many tabs, windows, and estimated RAM before you click restore.</div></div></li>
+      <li><span class="check">✓</span><div><div class="feat-title">Export to JSON / HTML</div><div class="feat-desc">One-click export at any time. No login required. Your data is portable by design.</div></div></li>
+      <li><span class="check">✓</span><div><div class="feat-title">Auto-backup with visible log</div><div class="feat-desc">Hourly local snapshots (7-day retention) with a human-readable history you can inspect.</div></div></li>
+      <li><span class="check">✓</span><div><div class="feat-title">License that travels</div><div class="feat-desc">Email-based license, not Google-account-locked. Works on Chrome, Brave, Edge, Vivaldi.</div></div></li>
+      <li><span class="check">✓</span><div><div class="feat-title">Crash recovery built-in</div><div class="feat-desc">Session snapshot every 5 minutes. If Chrome crashes, your tabs are already safe.</div></div></li>
     </ul>
   </div>
 </section>
 
-<!-- PRICING -->
 <section id="pricing">
   <div class="wrap">
     <h2><span class="num">03</span>Pricing</h2>
@@ -250,12 +203,11 @@
       </div>
     </div>
     <p style="color:var(--muted);font-size:13.5px;margin-top:16px">
-      Prices are placeholders while we build. Waitlist members get <strong>50% off</strong> at launch.
+      Prices are placeholders while we build. Survey participants get <strong>50% off</strong> at launch.
     </p>
   </div>
 </section>
 
-<!-- SURVEY -->
 <section id="survey">
   <div class="wrap">
     <div class="survey-box">
@@ -264,8 +216,7 @@
         5-minute survey (25 questions). Your answers directly shape what we build.
         <br/>No email required to participate.
       </p>
-      <!-- TODO: Replace with real survey link (Tally / Google Forms) -->
-      <a href="#survey-form-placeholder" class="btn btn-primary" id="survey-cta">
+      <a href="survey.html" class="btn btn-primary" id="survey-cta">
         Take the 5-minute survey →
       </a>
       <p style="margin-top:20px;font-size:13px;color:var(--muted)">
@@ -273,15 +224,16 @@
       </p>
     </div>
 
-    <!-- Waitlist form (Netlify Forms compatible) -->
     <div id="waitlist" style="margin-top:32px;background:var(--surface);
          border:1px solid var(--border);border-radius:var(--radius);padding:28px">
       <h3 style="margin-bottom:8px;font-size:18px">Join the waitlist</h3>
       <p style="color:var(--muted);font-size:14px;margin-bottom:16px">
         Get early access + 50% off at launch. No spam, ever.
       </p>
-      <form name="waitlist" method="POST" data-netlify="true" style="display:flex;gap:8px;flex-wrap:wrap">
-        <input type="hidden" name="form-name" value="waitlist" />
+      <form action="https://formsubmit.co/tuyentn23@gmail.com" method="POST" style="display:flex;gap:8px;flex-wrap:wrap">
+        <input type="hidden" name="_subject" value="TabGuard waitlist" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://tuyentn23-dot.github.io/tabguard-landing/?joined=1" />
         <input type="email" name="email" placeholder="you@example.com" required
                style="flex:1;min-width:200px;padding:12px 14px;border-radius:8px;
                       border:1px solid var(--border);background:var(--bg);color:var(--text);
@@ -295,34 +247,17 @@
   </div>
 </section>
 
-<!-- FAQ -->
 <section id="faq">
   <div class="wrap">
     <h2><span class="num">04</span>Questions</h2>
-    <details>
-      <summary>When will TabGuard launch?</summary>
-      <p>We're targeting a beta release in 8–12 weeks. Waitlist members get first access.</p>
-    </details>
-    <details>
-      <summary>What happens to my data if I stop using it?</summary>
-      <p>You own your data. Export to JSON or HTML at any time. No lock-in, no deletion traps.</p>
-    </details>
-    <details>
-      <summary>Why should I trust you with my tabs?</summary>
-      <p>We don't sync your tabs to any server unless you opt into Pro+ multi-device (and even then, end-to-end encrypted). All core features work offline, locally.</p>
-    </details>
-    <details>
-      <summary>Is there really no subscription?</summary>
-      <p>Correct. One-time payment for Pro and Pro+. Optional yearly maintenance tier ($6.99/year) for automatic updates — but never required.</p>
-    </details>
-    <details>
-      <summary>What about my existing Session Buddy / Tabs Outliner data?</summary>
-      <p>We'll ship an importer. If you can export it, we can import it.</p>
-    </details>
+    <details><summary>When will TabGuard launch?</summary><p>Targeting beta in 8–12 weeks. Survey participants get first access + 50% off.</p></details>
+    <details><summary>What happens to my data if I stop using it?</summary><p>You own your data. Export to JSON or HTML at any time. No lock-in, no deletion traps.</p></details>
+    <details><summary>Why should I trust you with my tabs?</summary><p>We don't sync your tabs to any server unless you opt into Pro+ multi-device (and even then, end-to-end encrypted). All core features work offline, locally.</p></details>
+    <details><summary>Is there really no subscription?</summary><p>Correct. One-time payment for Pro and Pro+. Optional yearly maintenance tier ($6.99/year) for automatic updates — but never required.</p></details>
+    <details><summary>What about my existing Session Buddy / Tabs Outliner data?</summary><p>We'll ship an importer. If you can export it, we can import it.</p></details>
   </div>
 </section>
 
-<!-- PRIVACY -->
 <section id="privacy">
   <div class="wrap">
     <h2><span class="num">05</span>Privacy</h2>
@@ -331,7 +266,7 @@
     </p>
     <ul style="color:var(--muted);padding-left:20px;line-height:1.9">
       <li>Anonymous install count (via Chrome Web Store)</li>
-      <li>Email address — <em>only if you opt into the waitlist</em></li>
+      <li>Email address — <em>only if you opt into the waitlist or survey</em></li>
       <li>Crash reports — <em>opt-in, anonymized</em></li>
     </ul>
     <p style="color:var(--muted);margin-top:20px;font-size:14px">
@@ -346,14 +281,13 @@
       <strong style="color:var(--text)">TabGuard</strong> — built by a solo developer who lost too many tabs.
       <br/>
       <a href="#privacy">Privacy</a> · <a href="#faq">FAQ</a> ·
-      <a href="mailto:hello@tabguard.example">Contact</a>
+      <a href="mailto:tuyentn23@gmail.com">Contact</a>
     </p>
     <p style="margin-top:16px;font-size:12px">© 2026 TabGuard. All rights reserved.</p>
   </div>
 </footer>
 
 <script>
-  // Scroll smooth
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const id = a.getAttribute('href').slice(1);
@@ -361,6 +295,9 @@
       if (el) { e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
     });
   });
+  if (window.location.search.includes('joined=1')) {
+    alert('Thanks! You are on the waitlist.');
+  }
 </script>
 
 </body>
