@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TabGuard — The tab manager that never loses your data</title>
+<meta name="description" content="TabGuard is a Chrome extension that saves, restores, and backs up your tabs with verification. No silent failures. No license lock-in. Free tier available." />
+<meta property="og:title" content="TabGuard — Never lose a tab again" />
+<meta property="og:description" content="Tab sessions with verification. No silent failures. No license lock-in." />
+<style>
+  :root{
+    --bg:#0a0e14; --surface:#131820; --surface-2:#1a2130;
+    --text:#e6edf3; --muted:#8b98a8; --accent:#4f9cf9; --accent-2:#7ee787;
+    --danger:#f85149; --warn:#d29922; --border:#30363d;
+    --radius:12px; --max:960px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+       background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* Hero */
+  header{padding:96px 0 64px;text-align:center;border-bottom:1px solid var(--border)}
+  .badge{display:inline-block;padding:4px 12px;border-radius:999px;
+         background:var(--surface-2);color:var(--accent-2);font-size:13px;
+         border:1px solid var(--border);margin-bottom:24px}
+  h1{font-size:clamp(32px,5vw,56px);line-height:1.1;letter-spacing:-0.02em;
+     font-weight:700;margin-bottom:20px}
+  h1 .accent{color:var(--accent)}
+  .sub{font-size:clamp(16px,2vw,20px);color:var(--muted);max-width:640px;
+       margin:0 auto 32px}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:12px 24px;border-radius:8px;font-weight:600;
+       font-size:15px;border:1px solid transparent;cursor:pointer;transition:all .15s}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:#3d7fd4;text-decoration:none}
+  .btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}
+  .btn-ghost:hover{background:var(--surface-2);text-decoration:none}
+
+  /* Sections */
+  section{padding:64px 0;border-bottom:1px solid var(--border)}
+  h2{font-size:clamp(24px,3vw,32px);margin-bottom:16px;letter-spacing:-0.01em}
+  h2 .num{color:var(--accent);font-variant-numeric:tabular-nums;margin-right:8px}
+  .lead{color:var(--muted);font-size:17px;margin-bottom:32px;max-width:720px}
+
+  /* Problem cards */
+  .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .card{background:var(--surface);border:1px solid var(--border);
+        border-radius:var(--radius);padding:24px}
+  .card .icon{font-size:24px;margin-bottom:12px}
+  .card h3{font-size:17px;margin-bottom:8px;font-weight:600}
+  .card p{color:var(--muted);font-size:14.5px}
+  .quote{border-left:3px solid var(--danger);padding-left:12px;margin-top:12px;
+         color:var(--muted);font-style:italic;font-size:13.5px}
+
+  /* Features */
+  .feat-list{list-style:none}
+  .feat-list li{padding:14px 0;border-bottom:1px solid var(--border);
+                display:flex;gap:14px;align-items:flex-start}
+  .feat-list li:last-child{border-bottom:none}
+  .check{color:var(--accent-2);font-size:20px;flex-shrink:0;line-height:1.4}
+  .feat-title{font-weight:600;margin-bottom:2px}
+  .feat-desc{color:var(--muted);font-size:14.5px}
+
+  /* Pricing */
+  .pricing{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .price{background:var(--surface);border:1px solid var(--border);
+         border-radius:var(--radius);padding:28px;position:relative}
+  .price.featured{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+  .price .tag{position:absolute;top:-12px;left:24px;background:var(--accent);
+              color:#fff;font-size:11px;padding:3px 10px;border-radius:999px;
+              font-weight:600;letter-spacing:0.05em}
+  .price .name{font-size:14px;color:var(--muted);text-transform:uppercase;
+               letter-spacing:0.08em;margin-bottom:8px}
+  .price .amount{font-size:40px;font-weight:700;letter-spacing:-0.02em;line-height:1}
+  .price .amount small{font-size:15px;color:var(--muted);font-weight:400}
+  .price ul{list-style:none;margin-top:20px}
+  .price ul li{padding:6px 0;font-size:14px;color:var(--muted)}
+  .price ul li:before{content:"✓  ";color:var(--accent-2);font-weight:700}
+
+  /* Survey */
+  .survey-box{background:linear-gradient(135deg,var(--surface) 0%,var(--surface-2) 100%);
+              border:1px solid var(--border);border-radius:var(--radius);
+              padding:32px;text-align:center}
+  .survey-box h3{margin-bottom:12px;font-size:20px}
+  .survey-box p{color:var(--muted);margin-bottom:24px;font-size:15px}
+
+  /* FAQ */
+  details{background:var(--surface);border:1px solid var(--border);
+          border-radius:var(--radius);padding:16px 20px;margin-bottom:12px}
+  summary{cursor:pointer;font-weight:600;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ ";color:var(--accent);transition:transform .15s;
+                  display:inline-block}
+  details[open] summary::before{transform:rotate(90deg)}
+  details p{color:var(--muted);margin-top:12px;font-size:14.5px}
+
+  /* Footer */
+  footer{padding:48px 0 64px;text-align:center;color:var(--muted);font-size:14px}
+  footer a{color:var(--muted)}
+
+  @media (max-width:600px){
+    header{padding:64px 0 48px}
+    section{padding:48px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="badge">● Early access — building in public</span>
+    <h1>The tab manager that<br/><span class="accent">never loses your data.</span></h1>
+    <p class="sub">
+      TabGuard saves, restores, and backs up your tabs with <strong>verification</strong>.
+      No silent failures. No license lock-in. Export any time.
+    </p>
+    <div class="cta-row">
+      <a href="#survey" class="btn btn-primary">Join the waitlist →</a>
+      <a href="#problem" class="btn btn-ghost">Why TabGuard?</a>
+    </div>
+  </div>
+</header>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="wrap">
+    <h2><span class="num">01</span>The tab problem is real</h2>
+    <p class="lead">
+      We read 30 verified reviews of the three largest tab managers (Session Buddy,
+      Tabs Outliner, FreshStart — 1.16M combined users). The same patterns keep coming up.
+    </p>
+    <div class="grid">
+      <div class="card">
+        <div class="icon">💾</div>
+        <h3>Silent data loss</h3>
+        <p>Your session "saves" — but it doesn't. Or it saves only 1 tab. You find out days later.</p>
+        <p class="quote">"only opens the 1st tab of a session since the update… I have over 80 saved sessions. Desperate!" — FreshStart reviewer</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔒</div>
+        <h3>License lock-in</h3>
+        <p>Pay once — but your license stops working when you change email, browser, or device.</p>
+        <p class="quote">"I would pay $15/year so that I can add multiple chrome accounts, but I don't like paying one license per account." — Tabs Outliner reviewer</p>
+      </div>
+      <div class="card">
+        <div class="icon">🐌</div>
+        <h3>Restore that crashes</h3>
+        <p>Opening a large session can freeze Chrome. You lose context, then you lose trust.</p>
+        <p class="quote">"restoring a saved session sometimes causes Chrome to crash because of a spike in RAM usage." — Session Buddy reviewer</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="wrap">
+    <h2><span class="num">02</span>How TabGuard is different</h2>
+    <p class="lead">
+      We built TabGuard around one principle: <strong>your data belongs to you, and you should
+      always know its state.</strong>
+    </p>
+    <ul class="feat-list">
+      <li>
+        <span class="check">✓</span>
+        <div>
+          <div class="feat-title">Verified saves</div>
+          <div class="feat-desc">Every save is checksum-verified and shows a badge. You'll never wonder if it worked.</div>
+        </div>
+      </li>
+      <li>
+        <span class="check">✓</span>
+        <div>
+          <div class="feat-title">Restore preview</div>
+          <div class="feat-desc">See exactly how many tabs, windows, and estimated RAM before you click restore.</div>
+        </div>
+      </li>
+      <li>
+        <span class="check">✓</span>
+        <div>
+          <div class="feat-title">Export to JSON / HTML</div>
+          <div class="feat-desc">One-click export at any time. No login required. Your data is portable by design.</div>
+        </div>
+      </li>
+      <li>
+        <span class="check">✓</span>
+        <div>
+          <div class="feat-title">Auto-backup with visible log</div>
+          <div class="feat-desc">Hourly local snapshots (7-day retention) with a human-readable history you can inspect.</div>
+        </div>
+      </li>
+      <li>
+        <span class="check">✓</span>
+        <div>
+          <div class="feat-title">License that travels</div>
+          <div class="feat-desc">Email-based license, not Google-account-locked. Works on Chrome, Brave, Edge, Vivaldi.</div>
+        </div>
+      </li>
+      <li>
+        <span class="check">✓</span>
+        <div>
+          <div class="feat-title">Crash recovery built-in</div>
+          <div class="feat-desc">Session snapshot every 5 minutes. If Chrome crashes, your tabs are already safe.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <h2><span class="num">03</span>Pricing</h2>
+    <p class="lead">One-time payment. No subscription lock-in.</p>
+    <div class="pricing">
+      <div class="price">
+        <div class="name">Free</div>
+        <div class="amount">$0</div>
+        <ul>
+          <li>Up to 50 saved sessions</li>
+          <li>Manual export to JSON</li>
+          <li>Local backup only</li>
+          <li>Chrome only</li>
+        </ul>
+      </div>
+      <div class="price featured">
+        <span class="tag">MOST POPULAR</span>
+        <div class="name">Pro</div>
+        <div class="amount">$19 <small>one-time</small></div>
+        <ul>
+          <li>Unlimited sessions</li>
+          <li>Auto-backup + verify</li>
+          <li>Restore preview</li>
+          <li>Export to JSON + HTML</li>
+          <li>1 device</li>
+        </ul>
+      </div>
+      <div class="price">
+        <div class="name">Pro+</div>
+        <div class="amount">$39 <small>one-time</small></div>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>Multi-device sync</li>
+          <li>Chrome + Brave + Edge + Vivaldi</li>
+          <li>Priority support</li>
+        </ul>
+      </div>
+    </div>
+    <p style="color:var(--muted);font-size:13.5px;margin-top:16px">
+      Prices are placeholders while we build. Waitlist members get <strong>50% off</strong> at launch.
+    </p>
+  </div>
+</section>
+
+<!-- SURVEY -->
+<section id="survey">
+  <div class="wrap">
+    <div class="survey-box">
+      <h3>Help us build TabGuard right</h3>
+      <p>
+        5-minute survey (25 questions). Your answers directly shape what we build.
+        <br/>No email required to participate.
+      </p>
+      <!-- TODO: Replace with real survey link (Tally / Google Forms) -->
+      <a href="#survey-form-placeholder" class="btn btn-primary" id="survey-cta">
+        Take the 5-minute survey →
+      </a>
+      <p style="margin-top:20px;font-size:13px;color:var(--muted)">
+        Prefer email? <a href="#waitlist">Join the waitlist</a> and we'll send the survey link.
+      </p>
+    </div>
+
+    <!-- Waitlist form (Netlify Forms compatible) -->
+    <div id="waitlist" style="margin-top:32px;background:var(--surface);
+         border:1px solid var(--border);border-radius:var(--radius);padding:28px">
+      <h3 style="margin-bottom:8px;font-size:18px">Join the waitlist</h3>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:16px">
+        Get early access + 50% off at launch. No spam, ever.
+      </p>
+      <form name="waitlist" method="POST" data-netlify="true" style="display:flex;gap:8px;flex-wrap:wrap">
+        <input type="hidden" name="form-name" value="waitlist" />
+        <input type="email" name="email" placeholder="you@example.com" required
+               style="flex:1;min-width:200px;padding:12px 14px;border-radius:8px;
+                      border:1px solid var(--border);background:var(--bg);color:var(--text);
+                      font-size:15px" />
+        <button type="submit" class="btn btn-primary">Notify me</button>
+      </form>
+      <p style="margin-top:12px;font-size:12.5px;color:var(--muted)">
+        By joining you agree to our <a href="#privacy">privacy policy</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <h2><span class="num">04</span>Questions</h2>
+    <details>
+      <summary>When will TabGuard launch?</summary>
+      <p>We're targeting a beta release in 8–12 weeks. Waitlist members get first access.</p>
+    </details>
+    <details>
+      <summary>What happens to my data if I stop using it?</summary>
+      <p>You own your data. Export to JSON or HTML at any time. No lock-in, no deletion traps.</p>
+    </details>
+    <details>
+      <summary>Why should I trust you with my tabs?</summary>
+      <p>We don't sync your tabs to any server unless you opt into Pro+ multi-device (and even then, end-to-end encrypted). All core features work offline, locally.</p>
+    </details>
+    <details>
+      <summary>Is there really no subscription?</summary>
+      <p>Correct. One-time payment for Pro and Pro+. Optional yearly maintenance tier ($6.99/year) for automatic updates — but never required.</p>
+    </details>
+    <details>
+      <summary>What about my existing Session Buddy / Tabs Outliner data?</summary>
+      <p>We'll ship an importer. If you can export it, we can import it.</p>
+    </details>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section id="privacy">
+  <div class="wrap">
+    <h2><span class="num">05</span>Privacy</h2>
+    <p class="lead">
+      TabGuard stores all tab data locally on your device by default. We collect only:
+    </p>
+    <ul style="color:var(--muted);padding-left:20px;line-height:1.9">
+      <li>Anonymous install count (via Chrome Web Store)</li>
+      <li>Email address — <em>only if you opt into the waitlist</em></li>
+      <li>Crash reports — <em>opt-in, anonymized</em></li>
+    </ul>
+    <p style="color:var(--muted);margin-top:20px;font-size:14px">
+      We never sell, share, or monetize your data. Full privacy policy will be published with the beta release.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>
+      <strong style="color:var(--text)">TabGuard</strong> — built by a solo developer who lost too many tabs.
+      <br/>
+      <a href="#privacy">Privacy</a> · <a href="#faq">FAQ</a> ·
+      <a href="mailto:hello@tabguard.example">Contact</a>
+    </p>
+    <p style="margin-top:16px;font-size:12px">© 2026 TabGuard. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll smooth
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) { e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+</script>
+
+</body>
+</html>
