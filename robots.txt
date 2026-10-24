@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tuyentn23-dot.github.io/tabguard-landing/sitemap.xml
